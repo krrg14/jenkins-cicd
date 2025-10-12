@@ -13,7 +13,7 @@ git remote
 git remote -v
 git remote add origin main https://github.com/krrg14/git-demo.git
 git push -u origin main
-git rm --cached gitdemo
+git rm --cached <gitdemo>
 git commit --amend
 git commit --amend -m "msg"
 git revert HEAD # for skipping editor (--no-edit)
@@ -24,4 +24,7 @@ git checkout -b <name of bnch> --# for make branch and direct switch
 git merge <name of bnch>
 git clone <url>
 git clone <url> <folder name>
-git
+git remote remove main
+git ls-files
+git rm <file n>
+
