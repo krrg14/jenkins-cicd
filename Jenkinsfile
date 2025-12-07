@@ -7,7 +7,8 @@ pipeline{
                 }
             }
             stage('build') {
-                sh 'echo "build step(if needed) done"'
+                steps {
+                    sh 'echo "build step(if needed) done"'
             }
         }
         stage('deploy') {
