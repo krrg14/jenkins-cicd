@@ -1,5 +1,42 @@
 pipeline{
     agent any
+    stages {
+        stage('build') {
+            steps {
+                sh 'ls'
+                sh 'npm install'
+                sh 'echo N | ng analytics off'
+                sh 'ng build'
+                sh 'ls'
+                sh 'cd dist && ls'
+                sh 'cd dist/demo-jenkins-pro && ls'
+            }
+        }
+        stage ('deploy') {
+            steps {
+                withAWS(region: 'ap-south-1', credentials: '084402e5-9f28-4447-baac-33f48dd3704a') {
+                    sh 'ls-la'
+                    sh 'aws s3 cp ./dist/demo-jenkins-pro/ s3://demo-jenkins-pro/ --recursive --delete'
+                }
+
+        }
+    }
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+/*
+pipeline{
+    agent any
     environment{
         AWS_REGION='ap-south-1'
         S3_BUCKET='demo-jenkins-pro'
@@ -26,7 +63,7 @@ pipeline{
                         )
                     ]) {
                         sh '''
-                        aws s3 sync ./build/ s3://$S3_BUCKET/ --region $AWS_REGION --delete
+                        // aws s3 sync ./build/ s3://$S3_BUCKET/ --region $AWS_REGION --delete
                         ''' 
                     }
                 }
@@ -41,3 +78,4 @@ pipeline{
         }
     }
 }
+*/
